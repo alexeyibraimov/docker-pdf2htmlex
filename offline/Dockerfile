@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y libpam-systemd && apt-get install -y bu
 RUN apt-get install -y poppler-data autotools-dev libjpeg-dev libtiff4-dev libpng12-dev \
 		       libgif-dev libxt-dev autoconf automake libtool bzip2 libxml2-dev libuninameslist-dev \
 		       libspiro-dev python-dev libpango1.0-dev libcairo2-dev chrpath uuid-dev uthash-dev libopenjpeg-dev \
-		       sudo packaging-dev pkg-config python-dev g++ xz-utils wget
+		       sudo packaging-dev pkg-config python-dev g++ xz-utils wget cron
 
 ADD poppler-0.26.5.tar.xz /
 RUN cd / && cd poppler-0.26.5 && ./configure --prefix=/usr --enable-xpdf-headers && make && make install
@@ -32,8 +32,22 @@ RUN cd / && cd pdf2htmlEX && cmake . -DENABLE_SVG=ON && make && make install
 RUN rm /usr/sbin/invoke-rc.d
 RUN dpkg-divert --rename --remove /usr/sbin/invoke-rc.d
 
-RUN mkdir -p /pdf
+COPY createdir.sh /
+RUN chmod a+x /createdir.sh
 
-VOLUME /pdf
+# Copy the cron file to the container
+COPY cronfile /etc/cron.d/cronfile
 
-WORKDIR /pdf
+# Give execution rights on the cron job
+RUN chmod 0644 /etc/cron.d/cronfile
+
+# Apply the cron job
+RUN crontab /etc/cron.d/cronfile
+
+RUN mkdir -p /pdf2html
+
+VOLUME /pdf2html
+
+WORKDIR /
+
+ENTRYPOINT ["cron","-f"]

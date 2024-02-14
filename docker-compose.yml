@@ -1,0 +1,12 @@
+version: '3.8'
+networks:
+  default:
+    name: pdfnet
+services:
+  pdftohtml:
+    container_name: pdf2htmlEXDir
+    build: .
+    volumes:
+      ## это для добавления файлов вручную и получения преобразованных
+      - "./pdf2html:/pdf2html:rw,Z"
+
