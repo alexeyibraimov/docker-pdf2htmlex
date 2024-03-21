@@ -43,4 +43,5 @@ VOLUME /pdf2html
 
 WORKDIR /
 
+#ENTRYPOINT ["/createdir.sh"]
 ENTRYPOINT ["cron","-f"]

@@ -8,5 +8,5 @@ services:
     build: .
     volumes:
       ## это для добавления файлов вручную и получения преобразованных
-      - "./pdf2html:/pdf2html:rw,Z"
+      - "../upload/pdf2html:/pdf2html:rw,Z"
 
