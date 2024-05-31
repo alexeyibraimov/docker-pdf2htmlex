@@ -1,1 +1,1 @@
-*/2 * * * *   /createdir.sh >> /pdf2html/create.log
+5 * * * *   /createdir.sh >> /pdf2html/create.log
