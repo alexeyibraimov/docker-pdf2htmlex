@@ -4,7 +4,7 @@ cd /pdf2html
 for file in *.pdf; do
 		if [[ ${file%.pdf} != "*" ]]; then
 #				/pdf2htmlEX/pdf2htmlEX --zoom 1.3 --last-page 5 "$file" "result/_${file%.pdf}.html"
-				/pdf2htmlEX/pdf2htmlEX --zoom 1 --last-page 100 --embed-css 1 --embed-font 1 --embed-javascript 0 "$file" "result/_${file%.pdf}.html"
+				/pdf2htmlEX/pdf2htmlEX --zoom 1 --last-page 10 --embed-css 1 --embed-font 1 --embed-javascript 0 "$file" "result/_${file%.pdf}.html"
 
 #				sed -E 's/<span[^>]*_ _[0-9]+[^>]*>([^<]*)<\/span>([^<0-9]{1})/\1\2/g' "result/_${file%.pdf}.html" > "result/full_${file%.pdf}.html"
 #				sed -E 's/<span[^>]*_ _[0-9]+[^>]*>([ -]*)<\/span>/\1/g' "result/full_${file%.pdf}.html" > "result/_${file%.pdf}.html"
